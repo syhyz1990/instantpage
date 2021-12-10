@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://www.baiduyun.wiki" title="点击访问">
-    <img width="100" height="100" src="https://www.baiduyun.wiki/logo.png">
+  <a href="https://www.youxiaohou.com" title="点击访问">
+    <img width="100" height="100" src="https://www.youxiaohou.com/logo.png">
   </a>
 </p>
 
@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Chrome-≥76.0-brightgreen.svg" alt="chrome">
   <img src="https://img.shields.io/badge/Edge-≥88.0-brightgreen.svg" alt="edge">
   <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Mac%20%7C%20Linux-blue.svg" alt="platform">
-  <a href="https://www.baiduyun.wiki" title="点击访问">
+  <a href="https://www.youxiaohou.com" title="点击访问">
     <img src="https://img.shields.io/badge/Author-油小猴-red.svg">
   </a>
 </p>
@@ -31,7 +31,7 @@
 
 ## 💽 安装地址
 
-- **[安装地址（官方）](https://www.baiduyun.wiki/tool/install-instantpage.html)**
+- **[安装地址（官方）](https://www.youxiaohou.com/tool/install-instantpage.html)**
 
 - **[安装地址（GreasyFork）](https://greasyfork.org/zh-CN/scripts/436453)**
 
@@ -63,7 +63,7 @@
 
 💡 配置说明
 
-[详见此处](https://www.baiduyun.wiki/tool/install-instantpage.html)
+[详见此处](https://www.youxiaohou.com/tool/install-instantpage.html)
 
 ## 🐞 Bug 反馈
 
