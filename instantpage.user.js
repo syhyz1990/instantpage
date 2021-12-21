@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name              网页加速器
 // @namespace         https://github.com/syhyz1990/instantpage
-// @icon              https://www.baiduyun.wiki/instantpage.png
-// @icon64            https://www.baiduyun.wiki/instantpage.png
-// @version           1.2.2
+// @icon              https://www.youxiaohou.com/instantpage.png
+// @icon64            https://www.youxiaohou.com/instantpage.png
+// @version           1.2.3
 // @author            YouXiaoHou
 // @description       自动帮你加速网页中的超链接，加快打开网页的速度，实测符合条件的网页打开速度减少50%以上。
-// @updateURL         https://www.baiduyun.wiki/instantpage.user.js
-// @downloadURL       https://www.baiduyun.wiki/instantpage.user.js
+// @updateURL         https://www.youxiaohou.com/instantpage.user.js
+// @downloadURL       https://www.youxiaohou.com/instantpage.user.js
 // @license           AGPL
-// @homepage          https://www.baiduyun.wiki/tool/install-instantpage.html
-// @require           https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.js
-// @resource          swalStyle https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css
+// @homepage          https://www.youxiaohou.com/tool/install-instantpage.html
+// @require           https://unpkg.com/sweetalert2@10.15.6/dist/sweetalert2.min.js
+// @resource          swalStyle https://unpkg.com/sweetalert2@10.15.6/dist/sweetalert2.min.css
 // @match             *://*/*
 // @noframes
 // @run-at            document-idle
@@ -113,7 +113,7 @@
             GM_registerMenuCommand('设置', () => {
                 let dom = `<div style="font-size: 1em;">
                               <label class="instant-setting-label">加速外部链接<input type="checkbox" id="S-External" ${util.getValue('allow_external_links') ? 'checked' : ''} class="instant-setting-checkbox"></label>
-                              <label class="instant-setting-label"><span>加速含参数链接（谨慎开启） <a href="https://www.baiduyun.wiki/tool/install-instantpage.html#配置说明">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
+                              <label class="instant-setting-label"><span>加速含参数链接（谨慎开启） <a href="https://www.youxiaohou.com/tool/install-instantpage.html#配置说明">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速链接在本页打开<input type="checkbox" id="S-Target" ${util.getValue('enable_target_self') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速动画效果<input type="checkbox" id="S-Animate" ${util.getValue('enable_animation') ? 'checked' : ''} 
@@ -128,7 +128,7 @@
                     html: dom,
                     showCloseButton: true,
                     confirmButtonText: '保存',
-                    footer: '<div style="text-align: center;font-size: 1em;">点击查看 <a href="https://www.baiduyun.wiki/tool/install-instantpage.html" target="_blank">使用说明</a>，助手免费开源，<a href="https://www.baiduyun.wiki/instantpage.user.js">检查更新</a><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="M445.956 138.812L240.916 493.9c-11.329 19.528-12.066 44.214 0 65.123 12.067 20.909 33.898 32.607 56.465 32.607h89.716v275.044c0 31.963 25.976 57.938 57.938 57.938h134.022c32.055 0 57.938-25.975 57.938-57.938V591.63h83.453c24.685 0 48.634-12.803 61.806-35.739 13.172-22.844 12.343-50.016 0-71.386l-199.42-345.693c-13.633-23.58-39.24-39.516-68.44-39.516-29.198 0-54.897 15.935-68.438 39.516z" fill="#d81e06"/></svg></div>',
+                    footer: '<div style="text-align: center;font-size: 1em;">点击查看 <a href="https://www.youxiaohou.com/tool/install-instantpage.html" target="_blank">使用说明</a>，助手免费开源，<a href="https://www.youxiaohou.com/instantpage.user.js">检查更新</a><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="M445.956 138.812L240.916 493.9c-11.329 19.528-12.066 44.214 0 65.123 12.067 20.909 33.898 32.607 56.465 32.607h89.716v275.044c0 31.963 25.976 57.938 57.938 57.938h134.022c32.055 0 57.938-25.975 57.938-57.938V591.63h83.453c24.685 0 48.634-12.803 61.806-35.739 13.172-22.844 12.343-50.016 0-71.386l-199.42-345.693c-13.633-23.58-39.24-39.516-68.44-39.516-29.198 0-54.897 15.935-68.438 39.516z" fill="#d81e06"/></svg></div>',
                     customClass: {
                         popup: 'instant-popup',
                     },
