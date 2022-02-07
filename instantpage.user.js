@@ -3,15 +3,16 @@
 // @namespace         https://github.com/syhyz1990/instantpage
 // @icon              https://www.youxiaohou.com/instantpage.png
 // @icon64            https://www.youxiaohou.com/instantpage.png
-// @version           1.2.3
+// @version           1.2.5
 // @author            YouXiaoHou
 // @description       自动帮你加速网页中的超链接，加快打开网页的速度，实测符合条件的网页打开速度减少50%以上。
 // @updateURL         https://www.youxiaohou.com/instantpage.user.js
 // @downloadURL       https://www.youxiaohou.com/instantpage.user.js
 // @license           AGPL
 // @homepage          https://www.youxiaohou.com/tool/install-instantpage.html
-// @require           https://unpkg.com/sweetalert2@10.15.6/dist/sweetalert2.min.js
-// @resource          swalStyle https://unpkg.com/sweetalert2@10.15.6/dist/sweetalert2.min.css
+// @supportURL        https://github.com/syhyz1990/instantpage
+// @require           https://unpkg.com/sweetalert2@10.16.6/dist/sweetalert2.min.js
+// @resource          swalStyle https://unpkg.com/sweetalert2@10.16.6/dist/sweetalert2.min.css
 // @match             *://*/*
 // @noframes
 // @run-at            document-idle
@@ -25,14 +26,15 @@
 (function () {
     'use strict';
 
-    const fixedStyle = ['www.baidu.com']; //弹出框错乱的网站css插入到<html>而非<head>
     let util = {
         getValue(name) {
             return GM_getValue(name);
         },
+
         setValue(name, value) {
             GM_setValue(name, value);
         },
+
         include(str, arr) {
             str = str.replace(/[-_]/ig, '');
             for (let i = 0, l = arr.length; i < l; i++) {
@@ -43,6 +45,7 @@
             }
             return false;
         },
+
         addStyle(id, tag, css) {
             tag = tag || 'style';
             let doc = document, styleDom = doc.getElementById(id);
@@ -51,15 +54,11 @@
             style.rel = 'stylesheet';
             style.id = id;
             tag === 'style' ? style.innerHTML = css : style.href = css;
-            let root = this.include(location.href, fixedStyle);
-            root ? doc.documentElement.appendChild(style) : doc.getElementsByTagName('head')[0].appendChild(style);
+            doc.head.appendChild(style);
         }
     };
 
     let main = {
-        /**
-         * 配置默认值
-         */
         initValue() {
             let value = [{
                 name: 'setting_success_times',
@@ -84,7 +83,7 @@
                 value: ''
             }, {
                 name: 'exclude_keyword',
-                value: 'login\nlogout\nregister\nsignin\nsignup\nsignout\npay\nadd\ncreate\nedit\ndownload\ndel\nreset\nsubmit\ndoubleclick\ngoogleads\nexit'
+                value: 'login\nlogout\nregister\nsignin\nsignup\nsignout\npay\ncreate\nedit\ndownload\ndel\nreset\nsubmit\ndoubleclick\ngoogleads\nexit'
             }];
 
             value.forEach((v) => {
@@ -93,7 +92,7 @@
         },
 
         registerMenuCommand() {
-            GM_registerMenuCommand('已加速：' + util.getValue('setting_success_times') + '次', () => {
+            GM_registerMenuCommand('🚀 已加速：' + util.getValue('setting_success_times') + '次', () => {
                 Swal.fire({
                     showCancelButton: true,
                     title: '确定要重置加速次数吗？',
@@ -110,12 +109,12 @@
                     }
                 });
             });
-            GM_registerMenuCommand('设置', () => {
+            GM_registerMenuCommand('⚙️ 设置', () => {
                 let dom = `<div style="font-size: 1em;">
                               <label class="instant-setting-label">加速外部链接<input type="checkbox" id="S-External" ${util.getValue('allow_external_links') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label"><span>加速含参数链接（谨慎开启） <a href="https://www.youxiaohou.com/tool/install-instantpage.html#配置说明">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
-                              <label class="instant-setting-label">加速链接在本页打开<input type="checkbox" id="S-Target" ${util.getValue('enable_target_self') ? 'checked' : ''} class="instant-setting-checkbox"></label>
+                              <label class="instant-setting-label">加速链接在当前页打开<input type="checkbox" id="S-Target" ${util.getValue('enable_target_self') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速动画效果<input type="checkbox" id="S-Animate" ${util.getValue('enable_animation') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">链接预读延时（毫秒）<input type="number" min="65" id="S-Delay" value="${util.getValue('delay_on_hover')}" 
@@ -197,24 +196,24 @@
             if ('instantIntensity' in document.body.dataset) {
                 const intensity = document.body.dataset.instantIntensity;
 
-                if (intensity.substr(0, 'mousedown'.length) == 'mousedown') {
+                if (intensity.substr(0, 'mousedown'.length) === 'mousedown') {
                     useMousedown = true;
-                    if (intensity == 'mousedown-only') {
+                    if (intensity === 'mousedown-only') {
                         useMousedownOnly = true;
                     }
-                } else if (intensity.substr(0, 'viewport'.length) == 'viewport') {
+                } else if (intensity.substr(0, 'viewport'.length) === 'viewport') {
                     if (!(navigator.connection && (navigator.connection.saveData || (navigator.connection.effectiveType && navigator.connection.effectiveType.includes('2g'))))) {
-                        if (intensity == "viewport") {
+                        if (intensity === "viewport") {
                             if (document.documentElement.clientWidth * document.documentElement.clientHeight < 450000) {
                                 useViewport = true;
                             }
-                        } else if (intensity == "viewport-all") {
+                        } else if (intensity === "viewport-all") {
                             useViewport = true;
                         }
                     }
                 } else {
                     const milliseconds = parseInt(intensity);
-                    if (!isNaN(milliseconds)) {
+                    if (!Number.isNaN(milliseconds)) {
                         delayOnHover = milliseconds;
                     }
                 }
@@ -319,7 +318,7 @@
             }
 
             function mouseoutListener(event) {
-                if (event.relatedTarget && event.target.closest('a') == event.relatedTarget.closest('a')) {
+                if (event.relatedTarget && event.target.closest('a') === event.relatedTarget.closest('a')) {
                     return;
                 }
 
@@ -345,7 +344,7 @@
                 }
 
                 linkElement.addEventListener('click', function (event) {
-                    if (event.detail == 1337) {
+                    if (event.detail === 1337) {
                         return;
                     }
 
@@ -374,7 +373,7 @@
                     return;
                 }
 
-                if (!allowExternalLinks && linkElement.origin != location.origin && !('instant' in linkElement.dataset)) {
+                if (!allowExternalLinks && linkElement.origin !== location.origin && !('instant' in linkElement.dataset)) {
                     return;
                 }
 
@@ -401,7 +400,7 @@
                     return;
                 }
 
-                if (linkElement.hash && linkElement.pathname + linkElement.search == location.pathname + location.search) {
+                if (linkElement.hash && linkElement.pathname + linkElement.search === location.pathname + location.search) {
                     return;
                 }
 
@@ -448,12 +447,21 @@
                 .instant-setting-checkbox { width: 16px;height: 16px; }
                 .instant-setting-textarea { width: 100%; margin: 14px 0 0; height: 60px; resize: none; border: 1px solid #bbb; box-sizing: border-box; padding: 5px 10px; border-radius: 5px; color: #666; line-height: 1.2; }
                 .instant-setting-input { border: 1px solid #bbb; box-sizing: border-box; padding: 5px 10px; border-radius: 5px; width: 100px}
-                 @keyframes instantAnminate { from { opacity: 1; } 50% { opacity: 0.4 } to { opacity: 0.85; }}
-                .link-instanted { animation: instantAnminate 0.8s 1; animation-fill-mode:forwards }
-                .link-instanted * { animation: instantAnminate 0.8s 1; animation-fill-mode:forwards }
+                 @keyframes instantAnminate { from { opacity: 1; } 50% { opacity: 0.4 } to { opacity: 0.9; }}
+                .link-instanted { animation: instantAnminate 0.6s 1; animation-fill-mode:forwards }
+                .link-instanted * { animation: instantAnminate 0.6s 1; animation-fill-mode:forwards }
             `;
-            util.addStyle('swal-pub-style', 'style', GM_getResourceText('swalStyle'));
-            util.addStyle('instant-style', 'style', style);
+
+            if (document.head) {
+                util.addStyle('swal-pub-style', 'style', GM_getResourceText('swalStyle'));
+                util.addStyle('instant-style', 'style', style);
+            }
+
+            const headObserver = new MutationObserver(() => {
+                util.addStyle('swal-pub-style', 'style', GM_getResourceText('swalStyle'));
+                util.addStyle('instant-style', 'style', style);
+            });
+            headObserver.observe(document.head, {childList: true, subtree: true});
         },
 
         init() {
