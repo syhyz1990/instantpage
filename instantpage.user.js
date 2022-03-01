@@ -3,7 +3,7 @@
 // @namespace         https://github.com/syhyz1990/instantpage
 // @icon              https://www.youxiaohou.com/instantpage.png
 // @icon64            https://www.youxiaohou.com/instantpage.png
-// @version           1.2.5
+// @version           1.2.6
 // @author            YouXiaoHou
 // @description       自动帮你加速网页中的超链接，加快打开网页的速度，实测符合条件的网页打开速度减少50%以上。
 // @updateURL         https://www.youxiaohou.com/instantpage.user.js
@@ -70,6 +70,9 @@
                 name: 'allow_query_links',
                 value: false
             }, {
+                name: 'enable_store_link',
+                value: true
+            }, {
                 name: 'enable_target_self',
                 value: false
             }, {
@@ -114,6 +117,7 @@
                               <label class="instant-setting-label">加速外部链接<input type="checkbox" id="S-External" ${util.getValue('allow_external_links') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label"><span>加速含参数链接（谨慎开启） <a href="https://www.youxiaohou.com/tool/install-instantpage.html#配置说明">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
+                              <label class="instant-setting-label">加速扩展商店链接<input type="checkbox" id="S-Store" ${util.getValue('enable_store_link') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速链接在当前页打开<input type="checkbox" id="S-Target" ${util.getValue('enable_target_self') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速动画效果<input type="checkbox" id="S-Animate" ${util.getValue('enable_animation') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
@@ -142,6 +146,9 @@
                 });
                 document.getElementById('S-Query').addEventListener('change', (e) => {
                     util.setValue('allow_query_links', e.currentTarget.checked);
+                });
+                document.getElementById('S-Store').addEventListener('change', (e) => {
+                    util.setValue('enable_store_link', e.currentTarget.checked);
                 });
                 document.getElementById('S-Target').addEventListener('change', (e) => {
                     util.setValue('enable_target_self', e.currentTarget.checked);
@@ -185,6 +192,7 @@
             const DELAY_TO_NOT_BE_CONSIDERED_A_TOUCH_INITIATED_ACTION = 1111;
             const enableAnimation = util.getValue('enable_animation');
             const enableTargetSelf = util.getValue('enable_target_self');
+            const enableStoreLink = util.getValue('enable_store_link');
             window.instantLoaded = true;
             const excludeKeyword = util.getValue('exclude_keyword').split('\n');
 
@@ -419,6 +427,12 @@
 
                 if (prefetches.has(url)) {
                     return;
+                }
+
+                if (enableStoreLink) {
+                    linkElement.href = url.replace(/chrome.google.com\/webstore/, "chrome.crxsoso.com/webstore")
+                        .replace(/microsoftedge.microsoft.com\/addons/, "microsoftedge.crxsoso.com/addons")
+                        .replace(/addons.mozilla.org/, "addons.crxsoso.com");
                 }
 
                 const prefetcher = document.createElement('link');
