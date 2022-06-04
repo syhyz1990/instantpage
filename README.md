@@ -31,9 +31,7 @@
 
 ## 💽 安装地址
 
-- **[安装地址（官方）](https://www.youxiaohou.com/tool/install-instantpage.html)**
-
-- **[安装地址（GreasyFork）](https://greasyfork.org/zh-CN/scripts/436453)**
+- **[安装地址（推荐）](https://www.youxiaohou.com/tool/install-instantpage.html)**
 
 ## 🎨 助手效果
 
