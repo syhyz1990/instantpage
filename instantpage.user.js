@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              网页加速器
 // @namespace         https://github.com/syhyz1990/instantpage
-// @version           1.3.2
+// @version           1.4.1
 // @author            YouXiaoHou
 // @description       自动帮你加速网页中的超链接，加快打开网页的速度，实测符合条件的网页打开速度减少50%以上。
 // @updateURL         https://www.youxiaohou.com/instantpage.user.js
@@ -58,6 +58,7 @@
 
         reg: {
             chrome: /^https?:\/\/chrome.google.com\/webstore\/.+?\/([a-z]{32})(?=[\/#?]|$)/,
+            chromeNew: /^https?:\/\/chromewebstore.google.com\/.+?\/([a-z]{32})(?=[\/#?]|$)/,
             edge: /^https?:\/\/microsoftedge.microsoft.com\/addons\/.+?\/([a-z]{32})(?=[\/#?]|$)/,
             firefox: /^https?:\/\/(reviewers\.)?(addons\.mozilla\.org|addons(?:-dev)?\.allizom\.org)\/.*?(?:addon|review)\/([^/<>"'?#]+)/,
             microsoft: /^https?:\/\/(?:apps|www).microsoft.com\/(?:store|p)\/.+?\/([a-zA-Z\d]{10,})(?=[\/#?]|$)/,
@@ -121,7 +122,7 @@
             GM_registerMenuCommand('⚙️ 设置', () => {
                 let dom = `<div style="font-size: 1em;">
                               <label class="instant-setting-label">加速外部链接<input type="checkbox" id="S-External" ${util.getValue('allow_external_links') ? 'checked' : ''} class="instant-setting-checkbox"></label>
-                              <label class="instant-setting-label"><span>加速含参数链接 <a href="https://www.youxiaohou.com/tool/install-instantpage.html#配置说明">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
+                              <label class="instant-setting-label"><span>加速含参数链接 <a href="https://www.youxiaohou.com/tool/install-instantpage.html#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E">详见</a></span><input type="checkbox" id="S-Query" ${util.getValue('allow_query_links') ? 'checked' : ''} 
                               class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速扩展/应用商店链接<input type="checkbox" id="S-Store" ${util.getValue('enable_store_link') ? 'checked' : ''} class="instant-setting-checkbox"></label>
                               <label class="instant-setting-label">加速链接在当前页打开<input type="checkbox" id="S-Target" ${util.getValue('enable_target_self') ? 'checked' : ''} class="instant-setting-checkbox"></label>
@@ -390,6 +391,7 @@
 
                 if (util.include(linkElement.href, excludeKeyword)) {
                     if (!util.reg.chrome.test(linkElement.href) &&
+                        !util.reg.chromeNew.test(linkElement.href) &&
                         !util.reg.edge.test(linkElement.href) &&
                         !util.reg.edge.test(linkElement.href) &&
                         !util.reg.microsoft.test(linkElement.href)) {
@@ -453,6 +455,9 @@
                 if (enableStoreLink) {
                     if (util.reg.chrome.test(url)) {
                         linkElement.href = url.replace("chrome.google.com", "chrome.crxsoso.com");
+                    }
+                    if (util.reg.chromeNew.test(url)) {
+                        linkElement.href = url.replace("chromewebstore.google.com", "chrome.crxsoso.com/webstore");
                     }
                     if (util.reg.edge.test(url)) {
                         linkElement.href = url.replace("microsoftedge.microsoft.com", "microsoftedge.crxsoso.com");
