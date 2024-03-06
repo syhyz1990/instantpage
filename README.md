@@ -37,7 +37,7 @@
 
 注意观察链接的打开速度，左侧为开启加速前，右侧为开启加速后。
 
-![](https://cdn.jsdelivr.net/gh/youxiaohou/img/S6sTQV7zf5kOoJx.gif)
+![](https://pic.rmb.bdstatic.com/bjh/6f49449273c97a0a2308ef80ba1904f9950.gif)
 
 ## 📝 更新日志
 
@@ -63,7 +63,7 @@
 
 可以点击 <Icon name="tm"/> 图标打开配置选项，可配置选项如下图：
 
-![](https://cdn.jsdelivr.net/gh/youxiaohou/img/AWnurhMoXLtF9iJ.png)
+![](https://pic.rmb.bdstatic.com/bjh/fafb9667f90b231a22e781c12dec54064980.png)
 
 💡 配置说明
 
@@ -74,6 +74,3 @@
 如果您在使用过程中遇到问题，请 [点击这里](https://wj.qq.com/s2/8150559/6c08/) 或 [发送邮件](mailto:mail@youxiaohou.com) 进行反馈。
 
 特别鸣谢：[instantpage.js](https://instant.page/)
-
-## 💻 防止迷路
-![](https://cdn.jsdelivr.net/gh/youxiaohou/img/cmqN5niG6ER9oZ2.png)
