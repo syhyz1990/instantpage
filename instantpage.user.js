@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              网页加速器
 // @namespace         https://github.com/syhyz1990/instantpage
-// @version           1.4.2
+// @version           1.4.3
 // @author            YouXiaoHou
 // @description       自动帮你加速网页中的超链接，加快打开网页的速度，实测符合条件的网页打开速度减少50%以上。
 // @updateURL         https://www.youxiaohou.com/instantpage.user.js
@@ -9,8 +9,8 @@
 // @license           AGPL
 // @homepage          https://www.youxiaohou.com/tool/install-instantpage.html
 // @supportURL        https://github.com/syhyz1990/instantpage
-// @require           https://registry.npmmirror.com/sweetalert2/10.16.6/files/dist/sweetalert2.min.js
-// @resource          swalStyle https://registry.npmmirror.com/sweetalert2/10.16.6/files/dist/sweetalert2.min.css
+// @require           https://unpkg.com/sweetalert2@10.16.6/dist/sweetalert2.min.js
+// @resource          swalStyle https://unpkg.com/sweetalert2@10.16.6/dist/sweetalert2.min.css
 // @match             *://*/*
 // @noframes
 // @run-at            document-idle
